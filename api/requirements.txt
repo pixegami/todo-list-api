@@ -1,0 +1,3 @@
+fastpi[uvicorn]
+mangum
+boto3
