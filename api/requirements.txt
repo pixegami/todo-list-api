@@ -1,3 +1,4 @@
-fastpi[uvicorn]
+fastapi
+uvicorn
 mangum
 boto3
