@@ -2,7 +2,7 @@ from uuid import uuid4
 import requests
 
 
-ENDPOINT = "http://localhost:8000"
+ENDPOINT = "https://uvd7xa7y2f3vqyl3sviqbvwkoi0emyut.lambda-url.us-east-1.on.aws/"
 
 
 def test_can_put_and_get_task():
@@ -11,8 +11,9 @@ def test_can_put_and_get_task():
 
     task_id = create_response.json()["task"]["task_id"]
     get_task_response = get_task(task_id)
-    assert create_response.status_code == 200
-    assert get_task_response.json()["task"]["content"] == "task1"
+    assert get_task_response.status_code == 200
+    print(get_task_response)
+    assert get_task_response.json()["content"] == "task1"
 
 
 def test_can_list_tasks():
