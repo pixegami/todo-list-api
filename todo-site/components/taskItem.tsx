@@ -21,11 +21,14 @@ const TaskItem: React.FC<TaskItemInterface> = (props) => {
     props.onUpdate(updatedTask);
   };
 
+  const taskStyle: string = isDone ? "text-gray-400 line-through" : "";
+
   // Create a task item with a check box.
   const taskItem = (
-    <div className="task-item">
+    <div className="border border-gray-300 rounded-md p-3 mb-2 flex">
       <input type="checkbox" checked={isDone} onChange={handleTaskUpdate} />
-      <span>{props.content}</span>
+      <div className={"ml-4 " + taskStyle}>{props.content}</div>
+      <div className="grow" />
       <button
         className="text-red-500 ml-4"
         onClick={() => {

@@ -73,11 +73,10 @@ async def update_task(put_task_request: PutTaskRequest):
     table = _get_table()
     table.update_item(
         Key={"task_id": put_task_request.task_id},
-        UpdateExpression="SET content = :content, is_done = :is_done, updated_time = :updated_time",
+        UpdateExpression="SET content = :content, is_done = :is_done",
         ExpressionAttributeValues={
             ":content": put_task_request.content,
             ":is_done": put_task_request.is_done,
-            ":updated_time": int(time.time()),
         },
         ReturnValues="ALL_NEW",
     )

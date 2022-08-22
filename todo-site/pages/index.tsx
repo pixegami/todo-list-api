@@ -3,12 +3,13 @@ import Head from "next/head";
 import React, { useEffect } from "react";
 import Task from "../components/task";
 import TaskItem from "../components/taskItem";
+import { v4 as uuidv4 } from "uuid";
 
 const Home: NextPage = () => {
   const todoApiEndpoint: string =
     "https://uvd7xa7y2f3vqyl3sviqbvwkoi0emyut.lambda-url.us-east-1.on.aws";
 
-  const userId: string = "test-site-user";
+  const userId: string = "pixegami";
   const [isLoading, setIsLoading] = React.useState(true);
   const [tasks, setTasks] = React.useState<Task[]>([]);
   const [newTaskContent, setNewTaskContent] = React.useState("");
@@ -31,6 +32,9 @@ const Home: NextPage = () => {
   }, []);
 
   const putTask = async (task: Task) => {
+    // Put a local copy of this task into the state first for immediate feedback.
+    setTasks([task, ...tasks]);
+
     const response = await fetch(`${todoApiEndpoint}/create-task`, {
       method: "PUT",
       headers: {
@@ -70,6 +74,7 @@ const Home: NextPage = () => {
 
   const addNewTask = async () => {
     const task: Task = {
+      task_id: `task_${uuidv4()}`, // New task with UUID4
       user_id: userId,
       content: newTaskContent,
       is_done: false,
@@ -80,19 +85,26 @@ const Home: NextPage = () => {
 
   // Create the task input field.
   const taskInputField = (
-    <div>
+    <div className="flex mt-6">
       <input
+        className="border border-gray-300 p-2 rounded-md grow mr-4"
         type="text"
         placeholder="Enter task here"
         value={newTaskContent}
         onChange={(e) => setNewTaskContent(e.target.value)}
       />
-      <button onClick={addNewTask}>Add</button>
+      <button
+        className="bg-blue-600 text-white w-24 p-2 rounded-md"
+        onClick={addNewTask}
+      >
+        Add
+      </button>
     </div>
   );
 
   // Create a list of the tasks.
   const taskList = (
+    // Create task using index as key
     <div>
       {tasks.map((task) => (
         <TaskItem
@@ -105,6 +117,20 @@ const Home: NextPage = () => {
     </div>
   );
 
+  const loadingText: string = isLoading ? "Loading" : "Ready";
+  const loadingTextColor: string = isLoading
+    ? "text-orange-500"
+    : "text-green-500";
+  const loadingStatus = (
+    <div className={loadingTextColor + " text-center mb-4 text-sm"}>
+      {loadingText}
+    </div>
+  );
+
+  const userIdElement = (
+    <div className="text-center text-gray-700">User ID: {userId}</div>
+  );
+
   return (
     <div>
       <Head>
@@ -114,7 +140,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <div>Hello World</div>
+        <h1 className="text-2xl font-bold text-center">My Tasks</h1>
+        {userIdElement}
+        {loadingStatus}
         {taskList}
         {taskInputField}
       </main>
