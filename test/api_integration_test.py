@@ -2,7 +2,7 @@ from uuid import uuid4
 import requests
 
 
-ENDPOINT = "https://uvd7xa7y2f3vqyl3sviqbvwkoi0emyut.lambda-url.us-east-1.on.aws/"
+ENDPOINT = "https://67mtb3ab2k2rxf4o3xohyy7mfu0cfjho.lambda-url.ap-southeast-2.on.aws"
 
 
 def test_can_put_and_get_task():

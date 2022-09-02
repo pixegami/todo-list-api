@@ -7,8 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const Home: NextPage = () => {
   const todoApiEndpoint: string =
-    "https://uvd7xa7y2f3vqyl3sviqbvwkoi0emyut.lambda-url.us-east-1.on.aws";
-
+    "https://67mtb3ab2k2rxf4o3xohyy7mfu0cfjho.lambda-url.ap-southeast-2.on.aws";
   const userId: string = "pixegami";
   const [isLoading, setIsLoading] = React.useState(true);
   const [tasks, setTasks] = React.useState<Task[]>([]);

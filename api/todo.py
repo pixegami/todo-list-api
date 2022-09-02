@@ -26,14 +26,14 @@ async def root():
 
 @app.put("/create-task")
 async def create_task(put_task_request: PutTaskRequest):
-    updated_time = int(time.time())
+    created_time = int(time.time())
     item = {
         "user_id": put_task_request.user_id,
         "content": put_task_request.content,
         "is_done": False,
-        "updated_time": updated_time,
+        "created_time": created_time,
         "task_id": f"task_{uuid4().hex}",
-        "ttl": int(updated_time + 86400),  # Expire after 24 hours.
+        "ttl": int(created_time + 86400),  # Expire after 24 hours.
     }
 
     # Put it into the table.

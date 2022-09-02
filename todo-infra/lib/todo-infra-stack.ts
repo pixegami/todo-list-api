@@ -19,7 +19,7 @@ export class TodoInfraStack extends Stack {
     table.addGlobalSecondaryIndex({
       indexName: "user-index",
       partitionKey: { name: "user_id", type: ddb.AttributeType.STRING },
-      sortKey: { name: "updated_time", type: ddb.AttributeType.NUMBER },
+      sortKey: { name: "created_time", type: ddb.AttributeType.NUMBER },
     });
 
     // Create Lambda function for the API.
@@ -32,6 +32,7 @@ export class TodoInfraStack extends Stack {
       },
     });
 
+    // Create a URL so we can access the function.
     const functionUrl = api.addFunctionUrl({
       authType: lambda.FunctionUrlAuthType.NONE,
       cors: {
