@@ -6,8 +6,10 @@ import TaskItem from "../components/taskItem";
 import { v4 as uuidv4 } from "uuid";
 
 const Home: NextPage = () => {
+  // TODO: Update this URL to your own API endpoint!
   const todoApiEndpoint: string =
-    "https://67mtb3ab2k2rxf4o3xohyy7mfu0cfjho.lambda-url.ap-southeast-2.on.aws";
+    "https://cv736exbi2rvfpwo45jluf3u5a0olvpe.lambda-url.ap-southeast-2.on.aws";
+
   const userId: string = "pixegami";
   const [isLoading, setIsLoading] = React.useState(true);
   const [tasks, setTasks] = React.useState<Task[]>([]);
